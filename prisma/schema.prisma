@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Certification {
+  id         Int            @id @default(autoincrement())
+  name       String         @unique
+  createdAt  DateTime       @default(now())
+  categories Category[]
+  sessions   StudySession[]
+}
+
+model Category {
+  id              Int           @id @default(autoincrement())
+  name            String
+  certificationId Int
+  createdAt       DateTime      @default(now())
+  certification   Certification @relation(fields: [certificationId], references: [id])
+  flashcards      Flashcard[]
+  questions       Question[]
+
+  @@unique([name, certificationId])
+}
+
+model Flashcard {
+  id         Int      @id @default(autoincrement())
+  front      String
+  back       String
+  categoryId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Question {
+  id             Int           @id @default(autoincrement())
+  body           String
+  choices        String
+  correctAnswers String
+  isMultiple     Boolean       @default(false)
+  explanation    String?
+  categoryId     Int
+  tags           String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  category       Category      @relation(fields: [categoryId], references: [id])
+  answers        StudyAnswer[]
+}
+
+model StudySession {
+  id              Int           @id @default(autoincrement())
+  type            String
+  certificationId Int
+  totalCount      Int
+  correctCount    Int
+  durationSec     Int
+  timeLimitSec    Int?
+  examConfig      String?
+  createdAt       DateTime      @default(now())
+  certification   Certification @relation(fields: [certificationId], references: [id])
+  answers         StudyAnswer[]
+}
+
+model StudyAnswer {
+  id              Int          @id @default(autoincrement())
+  studySessionId  Int
+  questionId      Int
+  selectedAnswers String
+  isCorrect       Boolean
+  createdAt       DateTime     @default(now())
+  session         StudySession @relation(fields: [studySessionId], references: [id], onDelete: Cascade)
+  question        Question     @relation(fields: [questionId], references: [id])
+}
