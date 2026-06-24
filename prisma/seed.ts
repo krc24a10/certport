@@ -25,13 +25,18 @@ async function main() {
   if (lpic1) {
     await prisma.category.createMany({
       data: [
-        { name: "ファイル操作", certificationId: lpic1.id },
-        { name: "プロセス管理", certificationId: lpic1.id },
-        { name: "ネットワーク設定", certificationId: lpic1.id },
-        { name: "テキスト処理", certificationId: lpic1.id },
-        { name: "シェルスクリプト", certificationId: lpic1.id },
-        { name: "パーミッション", certificationId: lpic1.id },
-        { name: "パッケージ管理", certificationId: lpic1.id },
+        // Exam 101
+        { name: "[101] システムアーキテクチャ", certificationId: lpic1.id },
+        { name: "[101] Linuxのインストールとパッケージ管理", certificationId: lpic1.id },
+        { name: "[101] GNUとUnixコマンド", certificationId: lpic1.id },
+        { name: "[101] デバイス・Linuxファイルシステム・FHS", certificationId: lpic1.id },
+        // Exam 102
+        { name: "[102] シェルとシェルスクリプト", certificationId: lpic1.id },
+        { name: "[102] ユーザーインターフェースとデスクトップ", certificationId: lpic1.id },
+        { name: "[102] 管理タスク", certificationId: lpic1.id },
+        { name: "[102] 必須システムサービス", certificationId: lpic1.id },
+        { name: "[102] ネットワークの基礎", certificationId: lpic1.id },
+        { name: "[102] セキュリティ", certificationId: lpic1.id },
       ],
       skipDuplicates: true,
     });
@@ -40,11 +45,21 @@ async function main() {
   if (lpic2) {
     await prisma.category.createMany({
       data: [
-        { name: "カーネル", certificationId: lpic2.id },
-        { name: "システム起動", certificationId: lpic2.id },
-        { name: "ファイルシステム", certificationId: lpic2.id },
-        { name: "ネットワーク応用", certificationId: lpic2.id },
-        { name: "セキュリティ", certificationId: lpic2.id },
+        // Exam 201
+        { name: "[201] キャパシティプランニング", certificationId: lpic2.id },
+        { name: "[201] Linuxカーネル", certificationId: lpic2.id },
+        { name: "[201] システムの起動", certificationId: lpic2.id },
+        { name: "[201] ファイルシステムとデバイス", certificationId: lpic2.id },
+        { name: "[201] 高度なストレージ管理", certificationId: lpic2.id },
+        { name: "[201] ネットワーク設定", certificationId: lpic2.id },
+        { name: "[201] システムのメンテナンス", certificationId: lpic2.id },
+        // Exam 202
+        { name: "[202] ドメインネームサーバー", certificationId: lpic2.id },
+        { name: "[202] HTTPサービス", certificationId: lpic2.id },
+        { name: "[202] ファイル共有", certificationId: lpic2.id },
+        { name: "[202] ネットワーククライアント管理", certificationId: lpic2.id },
+        { name: "[202] メールサービス", certificationId: lpic2.id },
+        { name: "[202] システムセキュリティ", certificationId: lpic2.id },
       ],
       skipDuplicates: true,
     });
